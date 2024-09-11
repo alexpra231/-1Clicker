@@ -24,5 +24,37 @@ addLayer("p", {
     hotkeys: [
         {key: "p", description: "P: Reset for ★", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){return true},
+    buyables: {
+        11: {
+            cost(x) { return new Decimal(1).mul(x) },
+            title() {return "Clicker"},
+            display() { return "Upgrades the output of yur clicker. +3 per level"},
+            canAfford() { return player[this.layer].points.gte(this.cost()) },
+            buy() {
+                player[this.layer].points = player[this.layer].points.sub(this.cost())
+                setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+            },
+        },
+        12: {
+            cost(x) { return new Decimal(1).mul(x) },
+            title() {return "Prices"},
+            display() { return "Blah" },
+            canAfford() { return player[this.layer].points.gte(this.cost()) },
+            buy() {
+                player[this.layer].points = player[this.layer].points.sub(this.cost())
+                setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+            },
+        },
+        13: {
+            cost(x) { return new Decimal(1).mul(x) },
+            title() {return "Wishing"},
+            display() { return "Upgrading is slightly cheaper.   -1% per level" },
+            canAfford() { return player[this.layer].points.gte(this.cost()) },
+            buy() {
+                player[this.layer].points = player[this.layer].points.sub(this.cost())
+                setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+            },
+        },
+    }
 })
