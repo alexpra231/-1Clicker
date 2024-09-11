@@ -3,12 +3,12 @@ let modInfo = {
 	id: "+1clicker",
 	author: "nobody",
 	pointsName: "clicks",
-	modFiles: ["prestige.js", "tree.js"],
+	modFiles: ["p.js", "sp.js", "reb.js", ,"apoth.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
-	offlineLimit: 1,  // In hours
+	offlineLimit: 12,  // In hours
 }
 
 // Set your version in num and name
