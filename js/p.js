@@ -39,7 +39,7 @@ addLayer("p", {
         12: {
             cost(x) { return new Decimal(1).mul(x) },
             title() {return "Prices"},
-            display() { return "Blah" },
+            display() { return "Upgrading is slightly cheaper. -1% per level" },
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
                 player[this.layer].points = player[this.layer].points.sub(this.cost())
@@ -49,7 +49,7 @@ addLayer("p", {
         13: {
             cost(x) { return new Decimal(1).mul(x) },
             title() {return "Wishing"},
-            display() { return "Upgrading is slightly cheaper.   -1% per level" },
+            display() { return "" },
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
                 player[this.layer].points = player[this.layer].points.sub(this.cost())
