@@ -21,7 +21,7 @@ addLayer("ff", {
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
-    row: 4, // Row the layer is in on the tree (0 is the first row)
+    row: 5, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "f", description: "F: Reset for ✉", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
