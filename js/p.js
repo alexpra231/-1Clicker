@@ -27,7 +27,7 @@ addLayer("p", {
     layerShown(){return true},
     buyables: {
         11: {
-            cost(x) { return new Decimal(1).mul(x) },
+            cost(x) { return new Decimal(1).mul(x.add(1)) },
             title() {return "Clicker"},
             display() { return "Upgrades the output of yur clicker. +3 per level"},
             canAfford() { return player[this.layer].points.gte(this.cost()) },
@@ -37,9 +37,11 @@ addLayer("p", {
             },
         },
         12: {
-            cost(x) { return new Decimal(1).mul(x) },
+            cost(x) { return new Decimal(1).mul(x.add(1)) },
             title() {return "Prices"},
-            display() { return "Upgrading is slightly cheaper. -1% per level" },
+            display() { 
+                return "Cost: "+format(this.cost())+" ★<br>Amount: "+formatWhole(player.p.buyables[12])+"/675"
+            },
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
                 player[this.layer].points = player[this.layer].points.sub(this.cost())
@@ -47,7 +49,7 @@ addLayer("p", {
             },
         },
         13: {
-            cost(x) { return new Decimal(1).mul(x) },
+            cost(x) { return new Decimal(1).mul(x.add(1)) },
             title() {return "Wishing"},
             display() { return "" },
             canAfford() { return player[this.layer].points.gte(this.cost()) },
