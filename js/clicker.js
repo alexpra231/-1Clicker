@@ -12,8 +12,8 @@ addLayer("c", {
     baseResource: "clicks", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 2, // Prestige currency exponent
-    base: 2,
+    exponent: 1, // Prestige currency exponent
+    base: 1,
     canBuyMax() {return hasUpgrade("sp",11)},
     branches:["p"],
     gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -25,17 +25,25 @@ addLayer("c", {
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "s", description: "S: Reset for ☽", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "c", description: "C: Reset for levels", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true},
     clickables: {
         11: {
-            display() {return "click"},
+            display() {return "CLICK"},
             canClick() {return "True"},
             onClick() {
-                return player.points=player.points.add(player[this.layer].points)
+                //return player.points=player.points.times(player[this.layer].points)
+                cli=1
+                cli=cli.add(player[this.layer].points)
+                //cli.add(getBuyableAmount("p",11))
+                //cli=player.points.times(cli)
+                return player.points=player.points.add(cli)
             }
         }
     }
 })
 
+function clicker() {
+    
+}

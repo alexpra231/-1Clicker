@@ -7,12 +7,12 @@ addLayer("p", {
 		points: new Decimal(0),
     }},
     color: "lime",
-    requires: new Decimal(10), // Can be a function that takes requirement increases into account
+    requires: 240, // Can be a function that takes requirement increases into account
     resource: "★", // Name of prestige currency
-    baseResource: "points", // Name of resource prestige is based on
-    baseAmount() {return player.points}, // Get the current amount of baseResource
+    baseResource: "levels", // Name of resource prestige is based on
+    baseAmount() {return player["c"].points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.5, // Prestige currency exponent
+    //exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -29,7 +29,7 @@ addLayer("p", {
         11: {
             cost(x) { return new Decimal(1).mul(x.add(1)) },
             title() {return "Clicker"},
-            display() { return "Upgrades the output of yur clicker. +3 per level"},
+            display() { return "Upgrades the output of your clicker. (+3 per level) "+" Cost: "+format(this.cost())+" ★<br>Amount: "+formatWhole(player.p.buyables[11])+"/475"},
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
                 player[this.layer].points = player[this.layer].points.sub(this.cost())
@@ -40,7 +40,7 @@ addLayer("p", {
             cost(x) { return new Decimal(1).mul(x.add(1)) },
             title() {return "Prices"},
             display() { 
-                return "Cost: "+format(this.cost())+" ★<br>Amount: "+formatWhole(player.p.buyables[12])+"/675"
+                return "Cost: "+format(this.cost())+" ★<br>Amount: "+formatWhole(player.p.buyables[12])+"/475"
             },
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
