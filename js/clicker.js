@@ -7,13 +7,13 @@ addLayer("c", {
 		points: new Decimal(0),
     }},
     color: "green",
-    requires: new Decimal(10), // Can be a function that takes requirement increases into account
+    requires() {return new Decimal(10).add(player.c.points.pow(2))}, // Can be a function that takes requirement increases into account
     resource: "levels", // Name of prestige currency
     baseResource: "clicks", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 1, // Prestige currency exponent
-    base: 1,
+    //exponent: 1, // Prestige currency exponent
+    //base: 1,
     canBuyMax() {return hasUpgrade("sp",11)},
     branches:["p"],
     gainMult() { // Calculate the multiplier for main currency from bonuses
