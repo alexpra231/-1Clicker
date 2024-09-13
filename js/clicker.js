@@ -12,10 +12,11 @@ addLayer("c", {
     baseResource: "clicks", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    //exponent: 1, // Prestige currency exponent
-    //base: 1,
+    //exponent: , // Prestige currency exponent
+    //base: 0,
     canBuyMax() {return hasUpgrade("sp",11)},
     branches:["p"],
+    canReset(){return player.c.points.lt(240)},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
