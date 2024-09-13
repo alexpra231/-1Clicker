@@ -7,7 +7,7 @@ addLayer("c", {
 		points: new Decimal(0),
     }},
     color: "green",
-    requires() {return new Decimal(10).add(player.c.points.pow(2))}, // Can be a function that takes requirement increases into account
+    requires() {return new Decimal(5).add(player.c.points.pow(2).div(player.c.points.gte(1)?2:1))}, // Can be a function that takes requirement increases into account
     resource: "levels", // Name of prestige currency
     baseResource: "clicks", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
@@ -34,8 +34,8 @@ addLayer("c", {
             canClick() {return "True"},
             onClick() {
                 //return player.points=player.points.times(player[this.layer].points)
-                cli=1
-                cli=cli.add(player[this.layer].points)
+                cli=1000000
+                //cli=cli.add(player[this.layer].points)
                 //cli.add(getBuyableAmount("p",11))
                 //cli=player.points.times(cli)
                 return player.points=player.points.add(cli)
@@ -44,6 +44,6 @@ addLayer("c", {
     }
 })
 
-function clicker() {
+//unction clicker() {
     
-}
+//}
