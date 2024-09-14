@@ -15,8 +15,31 @@ addLayer("c", {
     //exponent: , // Prestige currency exponent
     //base: 0,
     canBuyMax() {return hasUpgrade("sp",11)},
+    getNextThing(){
+        let cost = new Decimal(10).add(player.c.points.pow(2))
+        let uhhhh = new Decimal(0)
+        for(let i=1;player.points.gt(cost);i++){
+            cost = cost.add(new Decimal(10).add(player.c.points.add(i).pow(2)))
+            uhhhh = uhhhh.add(1)
+        }
+        return tmp.c.canBuyMax?cost:new Decimal(10).add(player.c.points.pow(2))
+    },
+    prestigeButtonText(){
+        if(!tmp.c.canBuyMax) return "Reset for "+formatWhole(tmp.c.getResetGain)+"+ "+tmp.c.resource+"<br><br>Req: "+formatWhole(player.points)+" / "+formatWhole(tmp.c.getNextThing)+" "+tmp.c.baseResource
+        else return "Reset for "+formatWhole(tmp.c.getResetGain)+"+ "+tmp.c.resource+"<br><br>Next at "+formatWhole(tmp.c.getNextThing)+" "+tmp.c.baseResource
+    },
+    canReset(){return (player.points.gte(new Decimal(10).add(player.c.points.pow(2)))&&player.c.points.lt(240))/*||(hasUpgrade("apoth",))*/},
+    getResetGain(){
+        let cost = new Decimal(10).add(player.c.points.pow(2))
+        let uhhhh = new Decimal(0)
+        for(let i=1;player.points.gt(cost);i++){
+            cost = cost.add(new Decimal(10).add(player.c.points.add(i).pow(2)))
+            uhhhh = uhhhh.add(1)
+        }
+        return tmp.c.canBuyMax?uhhhh:new Decimal(1)
+    },
     branches:["p"],
-    canReset(){return player.c.points.lt(240)},
+    //canReset(){return player.c.points.lt(240)},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -35,11 +58,11 @@ addLayer("c", {
             canClick() {return "True"},
             onClick() {
                 //return player.points=player.points.times(player[this.layer].points)
-                cli=1000000
+                //cli=1000000
                 //cli=cli.add(player[this.layer].points)
                 //cli.add(getBuyableAmount("p",11))
                 //cli=player.points.times(cli)
-                return player.points=player.points.add(cli)
+                return player.points=player.points.add(getBuyableAmount("p",11)).add(player[this.layer].points)
             }
         }
     }
