@@ -7,7 +7,11 @@ addLayer("c", {
 		points: new Decimal(0),
     }},
     color: "green",
-    requires() {return new Decimal(5).add(player.c.points.pow(2).div(player.c.points.gte(1)?2:1))}, // Can be a function that takes requirement increases into account
+    requires() {
+        let requ=new Decimal(5).add(player.c.points.pow(2).div(player.c.points.gte(1)?2:1))
+        return requ.times((1).sub(getBuyableAmount("p",12).times(0.01)))
+        //.times(getBuyableAmount("p",12).div(100))
+    }, // Can be a function that takes requirement increases into account
     resource: "levels", // Name of prestige currency
     baseResource: "clicks", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
@@ -62,7 +66,7 @@ addLayer("c", {
                 //cli=cli.add(player[this.layer].points)
                 //cli.add(getBuyableAmount("p",11))
                 //cli=player.points.times(cli)
-                return player.points=player.points.add(getBuyableAmount("p",11)).add(player[this.layer].points)
+                return player.points=player.points.add(getBuyableAmount("p",11).times(3)).add(player[this.layer].points).add(10000000)
             }
         }
     }
