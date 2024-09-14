@@ -40,7 +40,7 @@ addLayer("p", {
             cost(x) { return new Decimal(1).mul(x.add(1)) },
             title() {return "Prices"},
             display() { 
-                return "Cost: "+format(this.cost())+" ★<br>Amount: "+formatWhole(player.p.buyables[12])+"/475"
+                return "Upgrading is slightly cheaper (-1% per level) "+"Cost: "+format(this.cost())+" ★<br>Amount: "+formatWhole(player.p.buyables[12])+"/90"
             },
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
@@ -51,7 +51,7 @@ addLayer("p", {
         13: {
             cost(x) { return new Decimal(1).mul(x.add(1)) },
             title() {return "Wishing"},
-            display() { return "" },
+            display() { return "You get more ★ per prestige (+2 per level) "+"Cost: "+format(this.cost())+" ★<br>Amount: "+formatWhole(player.p.buyables[13])+"/525" },
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
                 player[this.layer].points = player[this.layer].points.sub(this.cost())

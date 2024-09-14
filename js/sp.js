@@ -27,13 +27,40 @@ addLayer("sp", {
     ],
     layerShown(){return true},
     upgrades:{
-        11: {
+        23: {
             title: "Generator of Genericness",
             description: "Gain 1 Point every second.",
             cost: new Decimal(1),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
-            branches: [12],
             tooltip: "hi",
-        }
+        },
+        12: {
+            title: "Generator of Genericness",
+            description: "Gain 1 Point every second.",
+            cost: new Decimal(1),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            tooltip: "hi",
+        },
+        13: {
+            title: "Generator of Genericness",
+            description: "Gain 1 Point every second.",
+            cost: new Decimal(1),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            tooltip: "hi",
+        },
+        21: {
+            title: "Generator of Genericness",
+            description: "Gain 1 Point every second.",
+            cost: new Decimal(1),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            tooltip: "hi",
+        },
+        22: {
+            title: "Generator of Genericness",
+            description: "Gain 1 Point every second.",
+            cost: new Decimal(1),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+            tooltip: "hi",
+        },
     }
 })

@@ -9,8 +9,7 @@ addLayer("c", {
     color: "green",
     requires() {
         let requ=new Decimal(5).add(player.c.points.pow(2).div(player.c.points.gte(1)?2:1))
-        return requ.times((1).sub(getBuyableAmount("p",12).times(0.01)))
-        //.times(getBuyableAmount("p",12).div(100))
+        return requ.times(new Decimal(1).sub(player.p.buyables[12].times(0.01)))
     }, // Can be a function that takes requirement increases into account
     resource: "levels", // Name of prestige currency
     baseResource: "clicks", // Name of resource prestige is based on
@@ -20,24 +19,24 @@ addLayer("c", {
     //base: 0,
     canBuyMax() {return hasUpgrade("sp",11)},
     getNextThing(){
-        let cost = new Decimal(10).add(player.c.points.pow(2))
+        let cost = new Decimal(10).add(player.c.points.pow(2)).times(new Decimal(1).sub(player.p.buyables[12].times(0.01)))
         let uhhhh = new Decimal(0)
         for(let i=1;player.points.gt(cost);i++){
-            cost = cost.add(new Decimal(10).add(player.c.points.add(i).pow(2)))
+            cost = cost.add(new Decimal(10).add(player.c.points.add(i).pow(2)).times(new Decimal(1).sub(player.p.buyables[12].times(0.01))))
             uhhhh = uhhhh.add(1)
         }
-        return tmp.c.canBuyMax?cost:new Decimal(10).add(player.c.points.pow(2))
+        return tmp.c.canBuyMax?cost:new Decimal(10).add(player.c.points.pow(2)).times(new Decimal(1).sub(player.p.buyables[12].times(0.01)))
     },
     prestigeButtonText(){
         if(!tmp.c.canBuyMax) return "Reset for "+formatWhole(tmp.c.getResetGain)+"+ "+tmp.c.resource+"<br><br>Req: "+formatWhole(player.points)+" / "+formatWhole(tmp.c.getNextThing)+" "+tmp.c.baseResource
         else return "Reset for "+formatWhole(tmp.c.getResetGain)+"+ "+tmp.c.resource+"<br><br>Next at "+formatWhole(tmp.c.getNextThing)+" "+tmp.c.baseResource
     },
-    canReset(){return (player.points.gte(new Decimal(10).add(player.c.points.pow(2)))&&player.c.points.lt(240))/*||(hasUpgrade("apoth",))*/},
+    canReset(){return (player.points.gte(new Decimal(10).add(player.c.points.pow(2)).times(new Decimal(1).sub(player.p.buyables[12].times(0.01))))&&player.c.points.lt(240))/*||(hasUpgrade("apoth",))*/},
     getResetGain(){
-        let cost = new Decimal(10).add(player.c.points.pow(2))
+        let cost = new Decimal(10).add(player.c.points.pow(2)).times(new Decimal(1).sub(player.p.buyables[12].times(0.01)))
         let uhhhh = new Decimal(0)
         for(let i=1;player.points.gt(cost);i++){
-            cost = cost.add(new Decimal(10).add(player.c.points.add(i).pow(2)))
+            cost = cost.add(new Decimal(10).add(player.c.points.add(i).pow(2)).times(new Decimal(1).sub(player.p.buyables[12].times(0.01))))
             uhhhh = uhhhh.add(1)
         }
         return tmp.c.canBuyMax?uhhhh:new Decimal(1)
